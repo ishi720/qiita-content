@@ -4,7 +4,7 @@ tags:
   - Go
   - GeminiAPI
 private: false
-updated_at: '2024-12-10T09:00:18+09:00'
+updated_at: '2025-04-22T02:05:30+09:00'
 id: 25f77ff6ef8adeacc535
 organization_url_name: null
 slide: false
@@ -71,7 +71,7 @@ func main() {
 
 # 結果
 
-そして変換結果です。なかなか制度が高いのではないでしょうか。
+そして変換結果です。なかなか精度が高いのではないでしょうか。
 
 |変換前|変換後|
 |--|--|
