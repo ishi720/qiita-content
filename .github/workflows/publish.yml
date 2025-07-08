@@ -36,7 +36,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          git diff
+
           git add .
+
           if ! git diff --cached --quiet; then
             git commit -m "chore: Pulled latest articles from Qiita"
             git push origin HEAD
