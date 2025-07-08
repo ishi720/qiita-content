@@ -27,7 +27,7 @@ jobs:
 
       - name: Pull articles from Qiita
         run: |
-          qiita pull --all --root .
+          qiita pull --root .
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
 
