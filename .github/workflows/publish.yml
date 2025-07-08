@@ -1,26 +1,21 @@
-# Please set 'QIITA_TOKEN' secret to your repository
-name: Publish articles
+name: Sync articles from Qiita
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
   contents: write
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
-
 jobs:
-  publish_articles:
+  pull_qiita_articles:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -30,7 +25,21 @@ jobs:
       - name: Install qiita-cli
         run: npm install -g @qiita/qiita-cli@v1.6.2
 
-      - name: Publish Qiita articles with --force
-        run: qiita publish --all --root . --force
+      - name: Pull articles from Qiita
+        run: |
+          qiita pull --all --root .
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
+
+      - name: Commit and push if articles updated
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add .
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: Pulled latest articles from Qiita"
+            git push origin HEAD
+          else
+            echo "No updates from Qiita"
+          fi
