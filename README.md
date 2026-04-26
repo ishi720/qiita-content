@@ -5,7 +5,13 @@
 [![My Qiita contributions](https://qiita-badge.apiapi.app/s/ishi720/contributions.svg)](http://qiita.com/ishi720)
 [![My Qiita followers](https://qiita-badge.apiapi.app/s/ishi720/followers.svg)](http://qiita.com/ishi720)
 
-# 記事を反映
+# 記事をダウンロード
+
+```bash
+$ npx qiita pull
+```
+
+# 記事をアップロード
 
 ```bash
 $ npx qiita publish --all
